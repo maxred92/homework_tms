@@ -34,7 +34,7 @@ class Truck(Auto):
         self.max_load = max_load
     
     def drive(self):
-        print(f'Attention!',f'Car {self.brand} {self.mark} drives', sep = '\n')
+        print(f'Attention!')
     def load(self):
         sleep(1)
         print('Loading')
