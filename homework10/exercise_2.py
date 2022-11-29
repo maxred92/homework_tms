@@ -12,6 +12,8 @@ class Auto():
 
     color = "red"
     weight = 1900
+    max_load = 1600
+    max_speed = 320
 
     def __init__(self, brand, age, mark):
         self.brand = brand
@@ -29,27 +31,22 @@ class Auto():
         print(auto_1.age, auto_2.age, sep='\n')
 
 class Truck(Auto):
-    def __init__(self, brand, age, mark, max_load):
-        super().__init__(brand, age, mark)
-        self.max_load = max_load
     
     def drive(self):
-        print(f'Attention!')
+        print(f'Attention!',f'Car {self.brand} {self.mark} drives', sep = '\n')
+    
     def load(self):
         sleep(1)
         print('Loading')
         sleep(1)
 
 class Sedan(Auto):
-    def __init__(self, brand, age, mark, max_speed):
-        super().__init__(brand, age, mark)
-        self.max_speed = max_speed
-    
+     
     def drive(self):
         print(f"Car {self.brand} {self.mark} drives",f"max speed of sedan {self.brand} {self.mark} is {self.max_speed}", sep = '\n')
 
-auto_1 = Truck("Toyota", 2015, "RAV4", 1600)
-auto_2 = Sedan("Honda", 2020, "CR-V", 320)
+auto_1 = Truck("Toyota", 2015, "RAV4")
+auto_2 = Sedan("Honda", 2020, "CR-V")
 auto_1.drive()
 auto_1.load()
 auto_1.stop()
