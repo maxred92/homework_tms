@@ -22,11 +22,11 @@ class Auto():
 
     def use(self):
         self.age += 1
-        print(car_1.age, car_2.age, sep='\n')
+        print(auto_1.age, auto_2.age, sep='\n')
 
 
-car_1 = Auto("Toyota", 2015, "RAV4")
-car_1.drive()
-car_2 = Auto("Honda", 2020, "CR-V")
-car_2.stop()
-car_1.use()
+auto_1 = Auto("Toyota", 2015, "RAV4")
+auto_1.drive()
+auto_2 = Auto("Honda", 2020, "CR-V")
+auto_2.stop()
+auto_1.use()
