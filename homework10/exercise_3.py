@@ -28,14 +28,14 @@ c.get()
 
 class Counter():
 
-    def __init__(self, start = 0, stop = None):
+    def __init__(self, start : int = 0, stop : int = -1):
         self.start = start
         self.stop = stop
 
     def increment(self):
         self.start += 1
         if self.start == self.stop:
-            return print("Maximal value is reached")
+            print("Maximal value is reached")
 
     def get(self):
         print(self.start)
