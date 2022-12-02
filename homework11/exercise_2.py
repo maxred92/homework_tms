@@ -33,6 +33,11 @@ class Temperature:
 
 t = Temperature()
 
-t.celsius = 0
-print(t.kelvin)
-print(t.fahrenheit)
+
+t.kelvin = int(input('Enter temerature in kelvin: '))
+print(f'°C: {t.celsius},°K: {t.kelvin},°F: {t.fahrenheit}')
+t.celsius = int(input('Enter temerature in celsius: '))
+print(f'°C: {t.celsius},°K: {t.kelvin},°F: {t.fahrenheit}')
+t.fahrenheit = int(input('Enter temerature in fahrenheit: '))
+print(f'°C: {t.celsius},°K: {t.kelvin},°F: {t.fahrenheit}')
+
