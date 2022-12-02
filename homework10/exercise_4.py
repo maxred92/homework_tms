@@ -31,16 +31,15 @@ class Cipher:
         decod_dict = dict(zip(self.alphabet_keyword, ascii_lowercase))
         return self.crypt(decod_dict, word)
 
-    def crypt(self, dict, words):
+    def crypt(self, dictonary, words):
 
         result_words = ""
         for i in words:
-            key = dict.get(i.lower(), i)
+            key = dictonary.get(i.lower(), i)
             result_words += key
         return result_words
 
-    def crypted_alphabet(self, keyword):
-        return keyword.lower() + "".join((i for i in ascii_lowercase if i not in keyword.lower()))
+
 
 
 cipher = Cipher("CRYPTOABDEFGHIJKLMNQSUVWXZ")
