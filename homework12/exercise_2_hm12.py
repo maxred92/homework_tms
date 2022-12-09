@@ -63,5 +63,4 @@ class Validator:
         else:
             return True
 
-v = Validator('Maxred92', 'Stayonfoot19922', 'maksimvolkau@gmail.by')
-v.validate_email('maksimvolkau@gmail.by')
+v = Validator('Maxred92', 'Stayot199*&d4', 'maksimvolkau@gmail.by')
