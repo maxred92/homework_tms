@@ -8,7 +8,7 @@ email — присутствует символ @, оканчивается . и
  В методе validate необходимо предусмотреть обработку этих ошибок и в случае их наличия — вызвать ошибку ValidationError. """
 
 
-""" import string
+import string
 
 class InvalidLogin(Exception):
     pass
@@ -21,6 +21,7 @@ class ValidationError(Exception):
 
 
 class Validator:
+    
     def __init__(self, login: str, password: str, email: str) -> bool:
         self.login = login
         self.password = password
@@ -50,91 +51,17 @@ class Validator:
     
     def validate(self):
         try:
-            self.validate_email()
             self.validate_login()
             self.validate_password()
+            self.validate_email()
         except InvalidLogin:
-            raise ValidationError
-        except InvalidEmail:
             raise ValidationError
         except InvalidPassword:
             raise ValidationError
-
-
-valid_1 = Validator("Sasha123", "sashaShauro#", "sobaka@mail.by")
-valid_1.validate() """
-
-import string
-
-class InvalidLogin(Exception):
-    pass
-
-
-class InvalidPassword(Exception):
-    pass
-
-
-class InvalidEmail(Exception):
-    pass
-
-
-class Validation(Exception):
-    pass
-
-
-class Validator:
-    """
-    Класс принимает логин,пароль,email и делает валидацию этих аргументов
-    """
-    def __init__(self, login, password, email):
-        self.login = login
-        self.password = password
-        self.email = email
-
-    def validate_email(self):
-        """
-        Метод делает валидацию на проверку email
-        """
-        if "@" in self.email and self.email.endswith(".by"):
-            return True
-        else:
-            raise InvalidEmail
-
-    def validate_login(self):
-        """
-        Метод делает валидацию на проверку логина
-        """
-        if len(self.login) > 6:
-            return True
-        else:
-            raise InvalidLogin
-
-    def validate_password(self):
-        """
-        Метод делает валидацию на проверку пароля
-        """
-        if len(self.password) < 8 or len(set(self.password) & set(string.ascii_lowercase)) < 1 or len(
-                set(self.password) & set(string.ascii_uppercase)) < 1 or len(
-            set(self.password) & set(string.punctuation)) < 1:
-            raise InvalidPassword
-        else:
-            return True
-
-    def validation(self):
-        """
-        Метод принимает другие методы и если в них случаются ошибки обрабатывает их и выводит собственную ошибку
-        """
-        try:
-            self.validate_email()
-            self.validate_login()
-            self.validate_password()
-        except InvalidLogin:
-            raise Validation
         except InvalidEmail:
-            raise Validation
-        except InvalidPassword:
-            raise Validation
+            raise ValidationError
+        else:
+            return True
 
-
-valid_1 = Validator("Sasha123", "sashaShauro#", "sobaka@mail.by")
-valid_1.validation("Sasha123")
+v = Validator('Maxred92', 'Stayonfoot19922', 'maksimvolkau@gmail.by')
+v.validate_email('maksimvolkau@gmail.by')
