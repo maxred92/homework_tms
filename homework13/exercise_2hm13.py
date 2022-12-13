@@ -33,8 +33,3 @@ lst = [1, 2, 3, 4, 5]
 itr = MySquareIterator(lst)
 for x in itr:
     print(x, end = ' ')
-
-
-
-
-
