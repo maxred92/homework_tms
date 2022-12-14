@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="E:/TMS-z32-onl/homework_tms/homework14/table_hm14.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="125"/><column_width id="3" width="1991"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,8:maincategory"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE users (
+	id INTEGER PRIMARY KEY,
+    first_name	TEXT,
+	last_name	TEXT,
+	gender	TEXT,
+	login	TEXT,
+	email	TEXT,
+	register_date	TEXT
+);
+CREATE TABLE category (
+	category_id	INTEGER PRIMARY KEY,
+	category_title	TEXT
+);
+CREATE TABLE posts (
+	id INTEGER,
+    title	TEXT,
+	date_created	TEXT,
+	content	TEXT,
+	post_author_id  INTEGER, 
+	post_category_id INTEGER, 
+	FOREIGN KEY(post_author_id) REFERENCES users(id),
+	FOREIGN KEY (post_category_id) REFERENCES category(category_id)
+);
+INSERT INTO users (id, first_name, last_name, gender, login, email, register_date) VALUES (1, 'Jadon', 'Sancho', 'Male', 'sanchooo10', 'jadsan1010@gmail.com', date('2020-05-17')),
+(2, 'Ethan','Galbraight','Male', 'ethan54', 'galbraight@gmail.com', date('2021-04-23')), 
+(3, 'Matej','Kovar', 'Male', 'mkovar1705', 'kovar0517@gmail.com', date('2021-01-01')), 
+(4, 'Lucia', 'Garcia', 'Female', 'luciadelapola17', 'lululucia17@gmail.com', date('2020-08-15')),
+(5, 'Rachel', 'Williams', 'Female', 'rach_williams8', 'rachy1992@gmail.com', date('2021-11-18'));
+
+INSERT INTO category(category_id, category_title) VALUES (1, 'Sport'), (2,'Fashion'),(3, 'Science'), (4, 'Politics'), (5, 'Music');
+
+INSERT INTO posts(id, title, date_created, content, post_author_id, post_category_id) 
+VALUES (1, 'Mysteriously bright flash is a black hole', date('2022-01-18'),'Astronomers have determined the source of an incredibly bright X-ray', 1, 1), 
+(2,'Can Morocco or Croatia shatter glass ceiling?', date('2022-12-10'), 'Croatia and Morocco are the surprise guests in the World Cup',2, 2),
+(3, 'Hate landlords: slogan baseball caps turn heads on social media', date('2022-09-10'), 'Socially conscious young people are snapping up political merchandise', 1, 1), 
+(4, 'Kanye West Suspended From Clubhouse After Antisemitic Remarks', date('2022-12-05'), 'Kanye West has been suspended from Clubhouse after the rapper began making antisemitic remarks during a private Q&amp;A', 4, 4),
+(5, 'South African', date('2022-12-12'),'South African Lawmakers Quash Cash-in-Sofa Scandal Report', 2, 2)</sql><current_tab id="0"/></tab_sql></sqlb_project>
