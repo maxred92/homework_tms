@@ -1,6 +1,3 @@
-#!.venv/Scripts/python
-
-
 from flask import Flask
 from app1.view import app1
 
@@ -14,7 +11,3 @@ def create_app():
 
 if __name__ == "__main__":
     create_app().run()
-
-
-
-
