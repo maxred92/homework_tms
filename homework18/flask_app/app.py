@@ -1,3 +1,6 @@
+#!.venv/Scripts/python
+
+
 from flask import Flask
 from app1.view import app1
 

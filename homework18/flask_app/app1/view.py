@@ -13,5 +13,5 @@ def times():
 
 @app1.route('/quote')
 def quote():
-    q = requests.get('https://api.kanye.rest')
-    return f"{q.json()}"
+    r = requests.get('https://api.kanye.rest')
+    return f"{r.json()['quote']}"
