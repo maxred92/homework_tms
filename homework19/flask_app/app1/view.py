@@ -20,10 +20,10 @@ def quote():
 @app1.route('/registration', methods = ["POST", "GET"])
 def register():
     if request.method == 'POST': 
-        username = request.form['username']
+        login = request.form['login']
         password = request.form['password']
         email = request.form['email']
-        val = Validator(username, password, email) 
+        val = Validator(login, password, email) 
         try:
             if val.validate():  
                 abort(405)
