@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: 'Times New Roman', Times, serif, Helvetica, sans-serif;}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #ffffff;
+    color: rgb(255, 7, 7);
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #e40c0c;
+}
+
+.container {
+    border-radius: 5px;
+    background-color: #c0b6f1;
+    padding: 20px;
+}
+</style>
+</head>
+<body>
+
+<h3>Your personal date</h3>
+
+<div class="container">
+  <form method="post">
+    <label for="fname">Username</label>
+    <input type="text" id="fname" name="username" placeholder="Enter your username">
+
+    <label for="lname">Password</label>
+    <input type="text" id="lname" name="password" placeholder="Enter your password">
+
+    <label for="subject">Email</label>
+    <input type="text" id="subject" name="email" placeholder="Enter your email" style="height:50px"></textarea>
+
+    <input type="submit" value="Registration">
+  </form>
+</div>
+
+</body>
+</html>
+
