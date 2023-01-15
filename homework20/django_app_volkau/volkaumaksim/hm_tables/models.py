@@ -13,7 +13,7 @@ class User(models.Model):
                             code = 'Invalid login')
                             ])
     email = models.TextField(validators=[
-                            RegexValidator(r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[by]',
+                            RegexValidator(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[by]$',
                             message='Incorrect mail',
                             code='Invalid email')
                             ])
