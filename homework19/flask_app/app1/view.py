@@ -9,7 +9,7 @@ app1 = Blueprint('app1', __name__)
 @app1.route('/quote')
 def quote():
 
-    list = []
+
     quotnumber = request.args.get('number')
     quotnumber = int(quotnumber)
     kanye_quotes = [requests.get('https://api.kanye.rest').json()['quote'] for x in
@@ -25,9 +25,10 @@ def register():
         email = request.form['email']
         val = Validator(login, password, email) 
         try:
-            if val.validate():  
-                abort(405)
-        except ValidationError: 
+            val.validate()
+        except ValidationError:
+            abort(405)
+        else:
             abort(406)
     return render_template('recording.html')
 
