@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kanye West quotes</title>
+</head>
+<body>
+ {% block content %}
+ <center><h1>Kanye West once said:</h1></center>
+    {% for kanye_quotes in list %}<br/>
+    <el>{{kanye_quotes}}</el>
+ {% endfor %}
+ {% endblock %}
+</body>
+</html>
