@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About me</title>
+</head>
+<body>
+  
+  {% extends "volkauresume/home.html" %}
+  {% load static %}
+  
+  {% block title %}About me{% endblock %}
+  {% block content %}
+<font color="black" face="Arial" size="3">My name is Maksim. I am 30 years old. I was born in Belarus, but now I live in Montenegro.
+  I work as a bartender at the restaurant.
+  In the future, I am sure that I will be able to become a good IT Specialist. That`s why I take the training course in the IT school “Teachmeskills”.
+</font>
+<center><img src="{% static 'volkauresume/image.jpg' %}" width="240" height="240" alt="My image">
+</center>
+   
+{% endblock %}
+</body>
+</html>
+

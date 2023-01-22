@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills</title>
+</head>
+<body>
+    {% extends "volkauresume/home.html" %}
+    {% load static %}
+    
+    {% block title %}Skills{% endblock %}
+    {% block content %}
+    <style>
+.table_dark {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 14px;
+  width: 60%;
+  text-align: left;
+  border-collapse: collapse;
+  background: #252F48;
+  margin: 0 auto;
+}
+.table_dark th {
+  color: #EDB749;
+  border-bottom: 1px solid #37B5A5;
+  padding: 12px 17px;
+}
+.table_dark td {
+  color: #CAD4D6;
+  border-bottom: 1px solid #37B5A5;
+  border-right:1px solid #37B5A5;
+  padding: 7px 17px;
+}
+.table_dark tr:last-child td {
+  border-bottom: none;
+}
+.table_dark td:last-child {
+  border-right: none;
+}
+.table_dark tr:hover td {
+  text-decoration: underline;
+}
+      </style> 
+<table class="table_dark">
+  <caption><h3>Hard Skills in Python</h3></caption>
+  
+  <tr>
+    <th>My Hard Skills</th>
+    <th>Grades</th>
+    </tr>
+  <tr>
+    <td>Django</td>
+    <td>3</td>
+    </tr>
+  <tr>
+    <td>Docker</td>
+    <td>2</td>
+    </tr>
+  <tr>
+    <td>Git</td>
+    <td>4</td>
+    </tr>
+  <tr>
+    <td>Machine Learning</td>
+    <td>4</td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  <table class="table_dark">
+    <caption><h3>Soft skills</h3> </caption>
+  
+  <tr>
+    <th>My Soft skills</th>
+    <th>Grades</th>
+    </tr>
+  <tr>
+    <td>Communication</td>
+    <td>4</td>
+    </tr>
+  <tr>
+    <td>Teamwork</td>
+    <td>5</td>
+    </tr>
+  <tr>
+    <td>Problem-solving</td>
+    <td>4</td>
+    </tr>
+  <tr>
+    <td>Organizational</td>
+    <td>5</td>
+    </tr>
+  <tr>
+    <td>Leadership</td>
+    <td>3</td>
+    </tr>
+  </table>
+    {% endblock %}
+</body>
+</html>
