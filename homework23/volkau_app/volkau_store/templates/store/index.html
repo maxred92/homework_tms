@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+{% extends 'base.html' %}
+
+{% block content %}
+        
+                                                                                         
+    {% for game in games %}
+    <div>   
+        <img width="150" height="200" src={{game.game_image.url}} alt='{{ game.name }}'>
+        <li><a href="{% url 'store:game_slug' game_slug=game.slug %}">{{game.name}}</a></li>
+        <li>Category: {{game.category}}</li>
+        <li>Price: {{game.price}} $</li>
+        <li>Release: {{game.release_date}}</li>
+    </div>
+    <hr>
+      
+    {% endfor %} 
+    
+    {% endblock content %} 
+</body>
+</html>
+
