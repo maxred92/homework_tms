@@ -16,6 +16,18 @@
 <font color="black" face="Arial" size="3">
 <center>      <strong>{{category.title}}</strong><br></center>
       <strong>Description: </strong>{{category.description}}
+
+      {% for game in games_category %}
+      <div>   
+          <img width="150" height="200" src={{game.game_image.url}} alt='{{ game.name }}'>
+          <li><a href="{% url 'store:game_slug' game_slug=game.slug %}">{{game.name}}</a></li>
+          <li>Category: {{game.category}}</li>
+          <li>Price: {{game.price}} $</li>
+          <li>Release: {{game.release_date}}</li>
+      </div>
+      <hr>
+        
+      {% endfor %} 
 </font>
 {% endblock %}
 </body>
