@@ -40,7 +40,8 @@ def index(request: HttpRequest):
 
 def category(request, category_slug):
     category = get_object_or_404(Category, slug = category_slug)
-    games_category = Games.objects.filter(is_active=True, category=category).all()
+    #games_category = Games.objects.filter(is_active=True, category=category).all()
+    games_category = category.games_set.filter(is_active=True)
     context = {
         'category' : category,
         'games_category' : games_category

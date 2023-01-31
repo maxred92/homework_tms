@@ -19,10 +19,10 @@
         <strong>Category: </strong> {{game.category}}<br>
         <strong>Price: </strong>{{game.price}}<strong>$</strong><hr>
         </div>
-        <strong><h2>Description: </h2></strong>
-        <p>{{game.description}}</p>
+      </center>
+        <p>{{game.description|safe}}</p>
       
-</font></center>
+</font>
 
 {% endblock %}
 </body>

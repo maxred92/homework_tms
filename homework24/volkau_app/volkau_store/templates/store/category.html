@@ -12,9 +12,10 @@
 
 {% block content %}
 
+
 <font color="black" face="Arial" size="3">
 <center>      <strong>{{category.title}}</strong><br></center>
-      <strong>Description: </strong>{{category.description}}
+      <strong>Description: </strong>{{category.description|safe}}
     <hr>                                                                                                                                                                               
       {% for game in games_category %}
       <div>   
