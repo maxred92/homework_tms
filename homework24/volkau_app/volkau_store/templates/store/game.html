@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game</title>
+</head>
+<body>
+
+{% extends 'base.html' %}
+
+{% block content %}
+<center><font color="black" face="Arial" size="3">
+<img width="270" height="360" src={{game.game_image.url}} alt={{game.name}}/>
+<div>
+    <br>
+        <strong>{{game.name}}</strong><br>
+        <strong>Category: </strong> {{game.category}}<br>
+        <strong>Price: </strong>{{game.price}}<strong>$</strong><hr>
+        </div>
+      </center>
+        <p>{{game.description|safe}}</p>
+      
+</font>
+
+{% endblock %}
+</body>
+</html>

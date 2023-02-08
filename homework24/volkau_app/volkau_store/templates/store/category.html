@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category</title>
+</head>
+<body>
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<font color="black" face="Arial" size="3">
+<center>      <strong>{{category.title}}</strong><br></center>
+      <strong>Description: </strong>{{category.description|safe}}
+    <hr>                                                                                                                                                                               
+      {% for game in games_category %}
+      <div>   
+          <img width="150" height="200" src={{game.game_image.url}} alt='{{ game.name }}'>
+          <li><a href="{% url 'store:game_slug' game_slug=game.slug %}">{{game.name}}</a></li>
+          <li>Category: {{game.category}}</li>
+          <li>Price: {{game.price}} $</li>
+          <li>Release: {{game.release_date}}</li>
+      </div>
+      <hr>
+      {% endfor %} 
+</font>
+{% endblock %}
+</body>
+</html>
