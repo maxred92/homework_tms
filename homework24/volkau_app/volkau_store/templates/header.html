@@ -12,7 +12,13 @@
     <div>
         <font color="grey" face="Arial" size="4">   
             <center><a href="{% url 'store:index' %}">Games</a> <a href="{% url 'store:all_categories' %}">Categories</a></center>
-            <center><h1>Online Store PS Games</h1></center> 
+            <center><h1>Online Store PS Games</h1></center>
+             <form method="post" action="{% url 'store:search' %}">
+                {% csrf_token %}
+                <input class="form-control me-2" type="searched" 
+                placeholder="Games" name="searched">
+                <button type="submit">Search</button>
+            </form>
     </div>
     <hr>
 </body>
