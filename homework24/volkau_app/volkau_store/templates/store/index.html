@@ -10,6 +10,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<form method="post" action="{% url 'store:search' %}">
+    {% csrf_token %}
+    <input type="searched" 
+    placeholder="Games" name="searched">
+    <button type="submit">Search</button>
 <div>
     <p>Sort Ascending:</p>
     <button><a href="{{request.index}}?order_by=name:asc">Name</a></button>

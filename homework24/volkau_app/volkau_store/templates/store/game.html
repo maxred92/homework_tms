@@ -24,25 +24,22 @@
         <p>{{game.description|safe}}</p>
       
 </font>
+{% if user.is_authenticated %}
 {% with comments.count as total_comments %}  
   <h2>  
     {{ total_comments }} comment{{ total_comments|pluralize }}  
   </h2>  
 {% endwith %}
-
-{% for comment in comments %}  
+{% for comment in comments %}
   <div class="comment">  
-    <p class="info">  
-      Comment {{ forloop.counter }} by {{ comment.name }}  
-      {{ comment.created }}  
-    </p>  
+    <p>Comment {{ forloop.counter }} by {{ comment.name }} {{ comment.created }} </p>  
   {{ comment.body|linebreaks }}
+  {% if user == comment.name %}  
   <button><a href="{% url 'store:comment_update' comment.id %}">Update</a></button>
   
   <button><a href="{% url 'store:comment_delete' comment.id %}">Delete</a></button> 
-  </div>  
-{% empty %}  
-  <p>There are no comments yet.</p>  
+  </div>
+  {% endif %} 
 {% endfor %}
 
 {% if new_comment %}  
@@ -54,8 +51,9 @@
     {% csrf_token %}  
     <p><input type="submit" value="Add comment"></p>  
   </form>
-{% endif %}
 
+{% endif %}
+{% endif %}  
 {% endblock %}
 </body>
 </html>

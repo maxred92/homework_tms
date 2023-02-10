@@ -6,6 +6,7 @@ from django.views.generic.edit import UpdateView, DeleteView
 from django.http import HttpRequest
 from django.core.paginator import Paginator
 from django.db.models import Avg
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -58,7 +59,7 @@ def index(request: HttpRequest):
 #     games = Games.objects.filter(is_active=True).all()
 #     return render(request, 'store/index.html', {'games': games})
 
-
+@login_required(login_url='users:login', redirect_field_name='next')
 def category(request, category_slug):
     category = get_object_or_404(Category, slug = category_slug)
     #games_category = Games.objects.filter(is_active=True, category=category).all()

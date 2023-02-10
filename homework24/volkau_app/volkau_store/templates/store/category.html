@@ -16,7 +16,8 @@
 <font color="black" face="Arial" size="3">
 <center>      <strong>{{category.title}}</strong><br></center>
       <strong>Description: </strong>{{category.description|safe}}
-    <hr>                                                                                                                                                                               
+    <hr>
+    {% if user.is_authenticated %}                                                                                                                                                                               
       {% for game in games_category %}
       <div>   
           <img width="150" height="200" src={{game.game_image.url}} alt='{{ game.name }}'>
@@ -26,8 +27,9 @@
           <li>Release: {{game.release_date}}</li>
       </div>
       <hr>
-      {% endfor %} 
+      {% endfor %}
 </font>
+{% endif %}
 {% endblock %}
 </body>
 </html>
