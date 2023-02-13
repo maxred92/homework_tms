@@ -29,19 +29,23 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = 'users.views.login'
+
 
 # Application definition
 
 INSTALLED_APPS = [
     'ckeditor',
     'volkau_store.apps.VolkauStoreConfig',
+    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap5'
+    'bootstrap5',
+    'django.contrib.postgres'
 ]
 
 MIDDLEWARE = [

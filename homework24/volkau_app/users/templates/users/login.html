@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In</title>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block content %}
+<center><h1>Sign In</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Sign In">
+    </form>
+    <br>
+Not registered yet? | <a href="{% url 'users:register' %}">Register</a>
+</center>
+{% endblock content %} 
+</body>
+</html>

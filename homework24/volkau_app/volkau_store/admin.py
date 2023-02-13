@@ -1,5 +1,5 @@
 from django.contrib import admin
-from volkau_store.models import Category, Games
+from volkau_store.models import Category, Games, Comment
 
 # Register your models here.
 
@@ -88,3 +88,9 @@ class GamesAdmin(admin.ModelAdmin):
             row = writer.writerow([getattr(obj, field) for field in field_names])
 
         return response
+
+    @admin.register(Comment)  
+    class CommentAdmin(admin.ModelAdmin):  
+        list_display = ('name', 'email', 'game', 'created', 'active', 'rating')  
+        list_filter = ('active', 'created', 'updated', 'rating')  
+        search_fields = ('name', 'email', 'body')

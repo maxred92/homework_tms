@@ -1,0 +1,23 @@
+{% extends  'base.html'%}
+
+{% block content %}
+    
+    {% if searched %}
+        <h4>You search for a game: {{ searched }}</h4>
+        <br/>
+        {% for game in games_searched %}
+        <div>   
+            <img width="150" height="200" src={{game.game_image.url}} alt='{{ game.name }}'>
+            <li><a href="{% url 'store:game_slug' game_slug=game.slug %}">{{game.name}}</a></li>
+            <li>Category: {{game.category}}</li>
+            <li>Price: {{game.price}} $</li>
+            <li>Release: {{game.release_date}}</li>
+            <li>Rating: {{game.get_rating|floatformat:1}}</li>
+        </div>
+        <hr>
+        {% endfor %}
+    {% else %}
+        <center><h1>You didn't enter anything</h1></center>
+    {% endif %}
+
+{% endblock %}
