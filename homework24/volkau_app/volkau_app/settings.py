@@ -44,8 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'bootstrap5',
-    'django.contrib.postgres'
+    'django.contrib.postgres',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',	
+	'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.twitch',
 ]
 
 MIDDLEWARE = [
@@ -151,3 +157,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #         "csv": "path.to.csv.serializer",
 #         "txt": "path.to.txt.serializer",
 #     }
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "localhost"
+EMAIL_PORT = 1025
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  #возможность входа на сайт по логину и паролю.
+    'allauth.account.auth_backends.AuthenticationBackend',  #пользователь, вошедшего через социальную сеть.
+]
+
+SITE_ID = 1
+ACCOUNT_EMAIL_VERIFICATION = "none"
+LOGIN_REDIRECT_URL = 'store:index'
