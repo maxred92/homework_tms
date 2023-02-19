@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('volkau_store/', include('volkau_store.urls')),
     path('users/', include('users.urls')),
-    path('accounts/', include('allauth.urls'))
+    path('accounts/', include('allauth.urls')),
+    path('api/v1/', include('api.urls'))
 
 ]
 

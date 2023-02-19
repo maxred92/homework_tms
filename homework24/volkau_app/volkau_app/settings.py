@@ -35,6 +35,8 @@ LOGIN_URL = 'users.views.login'
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
+    'api.apps.ApiConfig',
     'ckeditor',
     'volkau_store.apps.VolkauStoreConfig',
     'users.apps.UsersConfig',
@@ -171,3 +173,11 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1
 ACCOUNT_EMAIL_VERIFICATION = "none"
 LOGIN_REDIRECT_URL = 'store:index'
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+    'UNICODE_JSON': True,
+}
