@@ -36,6 +36,7 @@ LOGIN_URL = 'users.views.login'
 
 INSTALLED_APPS = [
     'rest_framework',
+    'django_filters',
     'api.apps.ApiConfig',
     'ckeditor',
     'volkau_store.apps.VolkauStoreConfig',
@@ -180,4 +181,10 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
     'UNICODE_JSON': True,
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 3
 }
+
