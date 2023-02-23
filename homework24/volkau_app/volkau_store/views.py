@@ -7,14 +7,17 @@ from django.http import HttpRequest
 from django.core.paginator import Paginator
 from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
+import datetime
 
 # Create your views here.
 
 
 
-
+@login_required(login_url=reverse_lazy('users:login'))
 def game(request, game_slug):
     game = get_object_or_404(Games, slug=game_slug)
+    last_visited = request.COOKIES.get(game_slug)
+    views_number = int(request.COOKIES.get(game_slug + str(request.user), 0))
     average_rating = game.comments.aggregate(Avg('rating'))
     average_rating = average_rating['rating__avg']
     comments = game.comments.all().order_by('-created') 
@@ -26,14 +29,21 @@ def game(request, game_slug):
             new_comment.game = game  
             new_comment.save()  
     else:  
-        comment_form = CommentForm()  
-    return render(request,  
-		  'store/game.html',  
-		  {'game': game,  
-		  'comments': comments,  
-		  'new_comment': new_comment,  
-		  'comment_form': comment_form,
-          'average_rating': average_rating})
+        comment_form = CommentForm()
+    context = {
+        'game': game,  
+		'comments': comments,  
+		'new_comment': new_comment,  
+		'comment_form': comment_form,
+        'average_rating': average_rating,
+        'last_visited': last_visited,
+        'views_number': views_number
+    } 
+    response = render(request,  'store/game.html', context)
+    visit_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    response.set_cookie(game_slug, visit_time, max_age=datetime.timedelta(days=20))
+    response.set_cookie(game_slug + str(request.user), views_number+1, max_age=datetime.timedelta(days=20))
+    return response
 
 def index(request: HttpRequest):
     sort = request.GET.get('order_by')

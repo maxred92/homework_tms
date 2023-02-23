@@ -22,7 +22,7 @@
         </div>
       </center>
         <p>{{game.description|safe}}</p>
-      
+ 
 </font>
 {% if user.is_authenticated %}
 {% with comments.count as total_comments %}  
@@ -54,6 +54,10 @@
 
 {% endif %}
 {% endif %}  
+{%if last_visited%}
+        <p>You viewed the page {{ views_number }} times, the last one was on : {{ last_visited }}</p>
+{% endif %}  
 {% endblock %}
+ 
 </body>
 </html>
