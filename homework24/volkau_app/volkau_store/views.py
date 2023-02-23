@@ -16,8 +16,8 @@ import datetime
 @login_required(login_url=reverse_lazy('users:login'))
 def game(request, game_slug):
     game = get_object_or_404(Games, slug=game_slug)
-    last_visited = request.COOKIES.get(game_slug)
-    views_number = int(request.COOKIES.get(game_slug + str(request.user), 0))
+    last_visited = request.COOKIES.get(game_slug + '_lasttime')
+    views_number = int(request.COOKIES.get(game_slug + '_viewsnumbers', 0))
     average_rating = game.comments.aggregate(Avg('rating'))
     average_rating = average_rating['rating__avg']
     comments = game.comments.all().order_by('-created') 
@@ -41,8 +41,8 @@ def game(request, game_slug):
     } 
     response = render(request,  'store/game.html', context)
     visit_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    response.set_cookie(game_slug, visit_time, max_age=datetime.timedelta(days=20))
-    response.set_cookie(game_slug + str(request.user), views_number+1, max_age=datetime.timedelta(days=20))
+    response.set_cookie(game_slug + '_lasttime', visit_time, max_age=datetime.timedelta(days=20))
+    response.set_cookie(game_slug + '_viewsnumbers', views_number+1, max_age=datetime.timedelta(days=20))
     return response
 
 def index(request: HttpRequest):
