@@ -7,13 +7,15 @@ from django.http import HttpRequest
 from django.core.paginator import Paginator
 from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_page
+
 import datetime
 
 # Create your views here.
 
 
 
-@login_required(login_url=reverse_lazy('users:login'))
+# @login_required(login_url=reverse_lazy('users:login'))
 def game(request, game_slug):
     game = get_object_or_404(Games, slug=game_slug)
     last_visited = request.COOKIES.get(game_slug + '_lasttime')
@@ -84,6 +86,11 @@ def category(request, category_slug):
 def all_categories(request):
     categories = Category.objects.all()
     return render(request, 'store/categories.html', {'categories': categories})
+
+#кэширование всех категорий через представления
+@cache_page(60*2)
+def all_categories_cache(request):
+    return all_categories(request)
 
 
 

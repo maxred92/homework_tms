@@ -35,6 +35,7 @@ LOGIN_URL = 'users.views.login'
 # Application definition
 
 INSTALLED_APPS = [
+    'debug_toolbar',
     'rest_framework',
     'django_filters',
     'api.apps.ApiConfig',
@@ -58,6 +59,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -65,6 +69,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'volkau_app.urls'
@@ -188,3 +193,17 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 3
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': 'E:\TMS-z32-onl\homework_tms\homework24\cache',
+    }
+}
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 5
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
