@@ -17,12 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from users import views as user_views
 import debug_toolbar
 
 
 urlpatterns = [
     path('__debug__/', include(debug_toolbar.urls)),
     path('admin/', admin.site.urls),
+    path('profile/', user_views.profile, name='profile'),
     path('volkau_store/', include('volkau_store.urls')),
     path('users/', include('users.urls')),
     path('accounts/', include('allauth.urls')),

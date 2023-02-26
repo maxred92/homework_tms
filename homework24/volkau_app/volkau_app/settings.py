@@ -207,3 +207,8 @@ CACHE_MIDDLEWARE_KEY_PREFIX = ''
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+
+SOCIALACCOUNT_PROVIDERS = {
+"twitch": {"SCOPE": ["user_read"]},
+}

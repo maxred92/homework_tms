@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from .forms import CustomUserForm, PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -31,3 +32,7 @@ class CustomPasswordChange(PasswordChangeView):
         self.request.session.flush()
         logout(self.request)
         return super().form_valid(form)
+
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html')
