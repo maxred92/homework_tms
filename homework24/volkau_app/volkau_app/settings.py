@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'bootstrap5',
+    'crispy_forms',
+    'drf_yasg', 
     'django.contrib.postgres',
     'allauth',
     'allauth.account',
@@ -57,6 +59,8 @@ INSTALLED_APPS = [
 	'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.twitch',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
@@ -190,7 +194,9 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 3
+    'PAGE_SIZE': 3,
+    'DEFAULT_SCHEMA_CLASS':'rest_framework.schemas.coreapi.AutoSchema'
+
 }
 
 CACHES = {
