@@ -1,4 +1,7 @@
+{% load cache %}
 {% include 'header.html'%}
 {% block content %}
 {% endblock content %}
+{% cache 500 footer %}
 {% include 'footer.html' %}
+{% endcache %}  <!-- кэширование футера через шаблоны -->

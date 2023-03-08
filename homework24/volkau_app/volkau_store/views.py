@@ -7,14 +7,19 @@ from django.http import HttpRequest
 from django.core.paginator import Paginator
 from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_page
+
+import datetime
 
 # Create your views here.
 
 
 
-
+# @login_required(login_url=reverse_lazy('users:login'))
 def game(request, game_slug):
     game = get_object_or_404(Games, slug=game_slug)
+    last_visited = request.COOKIES.get(game_slug + '_lasttime')
+    views_number = int(request.COOKIES.get(game_slug + '_viewsnumbers', 0))
     average_rating = game.comments.aggregate(Avg('rating'))
     average_rating = average_rating['rating__avg']
     comments = game.comments.all().order_by('-created') 
@@ -26,14 +31,21 @@ def game(request, game_slug):
             new_comment.game = game  
             new_comment.save()  
     else:  
-        comment_form = CommentForm()  
-    return render(request,  
-		  'store/game.html',  
-		  {'game': game,  
-		  'comments': comments,  
-		  'new_comment': new_comment,  
-		  'comment_form': comment_form,
-          'average_rating': average_rating})
+        comment_form = CommentForm()
+    context = {
+        'game': game,  
+		'comments': comments,  
+		'new_comment': new_comment,  
+		'comment_form': comment_form,
+        'average_rating': average_rating,
+        'last_visited': last_visited,
+        'views_number': views_number
+    } 
+    response = render(request,  'store/game.html', context)
+    visit_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    response.set_cookie(game_slug + '_lasttime', visit_time, max_age=datetime.timedelta(days=20))
+    response.set_cookie(game_slug + '_viewsnumbers', views_number+1, max_age=datetime.timedelta(days=20))
+    return response
 
 def index(request: HttpRequest):
     sort = request.GET.get('order_by')
@@ -74,6 +86,11 @@ def category(request, category_slug):
 def all_categories(request):
     categories = Category.objects.all()
     return render(request, 'store/categories.html', {'categories': categories})
+
+#кэширование всех категорий через представления
+@cache_page(60*2)
+def all_categories_cache(request):
+    return all_categories(request)
 
 
 

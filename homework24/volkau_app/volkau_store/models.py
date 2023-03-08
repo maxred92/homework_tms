@@ -2,6 +2,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.db.models import Avg
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
 class General_Store(models.Model):
@@ -58,7 +59,7 @@ class Comment(models.Model):
     game = models.ForeignKey(Games,  
 			     on_delete=models.CASCADE,  
 			     related_name='comments')  
-    name = models.CharField(max_length=80)  
+    name = models.ForeignKey(User, on_delete=models.CASCADE, null=True)  
     email = models.EmailField()  
     body = models.TextField()  
     created = models.DateTimeField(auto_now_add=True)  

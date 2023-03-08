@@ -14,7 +14,16 @@
         <input type="submit" value="Sign In">
     </form>
     <br>
-Not registered yet? | <a href="{% url 'users:register' %}">Register</a>
+    Or using your social networks
+    <div>
+        <button><a href="{% url 'account_login' %}">Twitch</a></button>
+        <button><a href="{% url 'account_login' %}">GitHub</a></button>
+    </div>
+    <br>
+    <a href="{% url 'users:pass-reset' %}">Have you forgotten your password?</a>
+    <br>Not registered yet? | <a href="{% url 'users:register' %}">Register</a>
+
+                
 </center>
 {% endblock content %} 
 </body>

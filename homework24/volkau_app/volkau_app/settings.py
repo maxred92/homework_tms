@@ -35,6 +35,10 @@ LOGIN_URL = 'users.views.login'
 # Application definition
 
 INSTALLED_APPS = [
+    'debug_toolbar',
+    'rest_framework',
+    'django_filters',
+    'api.apps.ApiConfig',
     'ckeditor',
     'volkau_store.apps.VolkauStoreConfig',
     'users.apps.UsersConfig',
@@ -44,11 +48,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'bootstrap5',
-    'django.contrib.postgres'
+    'crispy_forms',
+    'drf_yasg', 
+    'django.contrib.postgres',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',	
+	'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.twitch',
 ]
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 MIDDLEWARE = [
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,6 +73,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'volkau_app.urls'
@@ -151,3 +169,52 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #         "csv": "path.to.csv.serializer",
 #         "txt": "path.to.txt.serializer",
 #     }
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "localhost"
+EMAIL_PORT = 1025
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  #возможность входа на сайт по логину и паролю.
+    'allauth.account.auth_backends.AuthenticationBackend',  #пользователь, вошедшего через социальную сеть.
+]
+
+SITE_ID = 1
+ACCOUNT_EMAIL_VERIFICATION = "none"
+LOGIN_REDIRECT_URL = 'store:index'
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+    'UNICODE_JSON': True,
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 3,
+    'DEFAULT_SCHEMA_CLASS':'rest_framework.schemas.coreapi.AutoSchema'
+
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': 'E:\TMS-z32-onl\homework_tms\homework24\cache',
+    }
+}
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 5
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+
+SOCIALACCOUNT_PROVIDERS = {
+"twitch": {"SCOPE": ["user_read"]},
+}
