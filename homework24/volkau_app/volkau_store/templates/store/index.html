@@ -8,7 +8,6 @@
 </head>
 <body>
 {% extends 'base.html' %}
-
 {% block content %}
 <form method="post" action="{% url 'store:search' %}">
     {% csrf_token %}
