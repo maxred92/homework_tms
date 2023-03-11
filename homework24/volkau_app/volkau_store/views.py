@@ -100,7 +100,7 @@ def category(request, category_slug):
 
 def all_categories(request):
     categories = Category.objects.all()
-    log_store.delay(datetime.now(), str(request.path), str(request.user))
+    log_store.delay(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), str(request.path), str(request.user))
     return render(request, 'store/categories.html', {'categories': categories})
 
 #кэширование всех категорий через представления

@@ -11,8 +11,7 @@ logger = logging.getLogger('store')
 @shared_task()
 def log_store(path, user, time):
     time = datetime.now()
-    message_log = f'{time} | {path} | {user}'
+    message_log = f'{time} | {user} | {path}'
     logger.info(message_log)
-    log = Log()
-    log.log_text = message_log
+    log = Log(path=path, time=time)
     log.save()
