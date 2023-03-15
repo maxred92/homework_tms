@@ -1,5 +1,5 @@
 from django.contrib import admin
-from volkau_store.models import Category, Games, Comment
+from volkau_store.models import Category, Games, Comment,Log
 
 # Register your models here.
 
@@ -94,3 +94,9 @@ class GamesAdmin(admin.ModelAdmin):
         list_display = ('name', 'email', 'game', 'created', 'active', 'rating')  
         list_filter = ('active', 'created', 'updated', 'rating')  
         search_fields = ('name', 'email', 'body')
+
+@admin.register(Log)
+class LogAdmin(admin.ModelAdmin):
+    list_display = ('time', 'path', 'user')
+    search_fields = ('user',)
+    list_filter = ('time', )

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'rest_framework',
     'django_filters',
+    'bootstrap4',
     'api.apps.ApiConfig',
     'ckeditor',
     'volkau_store.apps.VolkauStoreConfig',
@@ -49,7 +50,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'bootstrap5',
     'crispy_forms',
     'drf_yasg', 
     'django.contrib.postgres',
@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.twitch',
 ]
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
@@ -162,8 +161,40 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+
+LOGGING = {
+    'version': 1,                       # the dictConfig format version
+    'disable_existing_loggers': False,  # retain the default loggers
+    'handlers': {
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': 'general.log',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        'store': {
+            'level': 'DEBUG',
+            'handlers': ['file'],
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '{name} {levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+}
 
 # SERIALIZATION_MODULES = {
 #         "csv": "path.to.csv.serializer",
