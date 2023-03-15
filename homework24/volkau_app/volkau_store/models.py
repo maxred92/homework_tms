@@ -78,7 +78,7 @@ class Comment(models.Model):
 
 class Log(models.Model):
     path = models.CharField(max_length=300, verbose_name='Logs path')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     time = models.DateTimeField(auto_now_add=True, verbose_name='Logs time')
 
     def __str__(self):

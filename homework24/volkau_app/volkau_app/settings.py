@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from celery.schedules import crontab
 import os 
 
 
@@ -36,6 +37,7 @@ LOGIN_URL = 'users.views.login'
 
 INSTALLED_APPS = [
     'debug_toolbar',
+    'django_celery_beat',
     'rest_framework',
     'django_filters',
     'bootstrap4',
@@ -205,6 +207,17 @@ LOGGING = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "localhost"
 EMAIL_PORT = 1025
+
+CELERY_BEAT_SCHEDULER='django_celery_beat.schedulers:DatabaseScheduler'
+
+#schedule example mailing every week
+CELERY_BEAT_SCHEDULE = {
+    'weekly_newsletter': {
+        'task': 'volkau_app.volkau_store.tasks.weekly_newsletter',
+        'schedule': crontab(minute=0, hour=9, day_of_week='1'),
+    },
+}
+
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  #возможность входа на сайт по логину и паролю.
