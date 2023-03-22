@@ -97,6 +97,6 @@ class GamesAdmin(admin.ModelAdmin):
 
 @admin.register(Log)
 class LogAdmin(admin.ModelAdmin):
-    list_display = ('time', 'path', 'user')
-    search_fields = ('user',)
+    list_display = ('time', 'path', 'username')
+    search_fields = ('username',)
     list_filter = ('time', )
