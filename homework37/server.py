@@ -19,20 +19,19 @@ while True:
      while True:
           try:
                calculation=c.recv(1024).decode()
-               if calculation == 'Q' or calculation == 'q' or calculation == 'Quit' or calculation == 'quit':
+               if calculation.upper() in ['Q', 'QUIT']:
                     c.send('Quit'.encode())
                     break
                else:
                     print('You gave me the equation:', calculation)
                     result = eval(calculation)
-                    c.send(str(result).encode())
           except (ZeroDivisionError):
-               c.send('ZeroDivizion'.encode())
+               result = 'ZeroDivizion'
           except (ArithmeticError):
-               c.send('MathError'.encode())
+               result = 'MathError'
           except (SyntaxError):
-               c.send('SyntaxError'.encode())
+               result = 'SyntaxError'
           except (NameError):
-               c.send('NameError'.encode())
-
-     c.close() 			
+               result = 'NameError'
+          c.send(str(result).encode())
+          c.close() 			
