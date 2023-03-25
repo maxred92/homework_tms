@@ -19,7 +19,7 @@ async def handle(request):
     except (NameError):
         result = print('You did not enter an equation, try again')
         print(result)
-        return web.Response(text=str(result))
+    return web.Response(text=str(result))
 
 
 app = web.Application()
