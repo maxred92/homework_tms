@@ -1,0 +1,5 @@
+common:
+  port: 7777 
+postgres:
+  database_url: postgres://maxred92:qwerty201971@localhost:5432/forum
+  require_ssl: false 
