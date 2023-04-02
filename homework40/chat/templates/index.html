@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<html>
+
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            var conn = null;
+            var name = "UNKNOWN";
+            function log(msg) {
+                var control = $('#log');
+                var date = new Date();
+                var date_prompt = '(' + date.toISOString().split('T')[1].slice(0, 8) + ') ';
+                control.html(control.html() + date_prompt + msg + '<br/>');
+                control.scrollTop(control.scrollTop() + 1000);
+            }
+            function connect() {
+                disconnect();
+                var wsUri = (window.location.protocol == 'https:' && 'wss://' || 'ws://') + window.location.host;
+                conn = new WebSocket(wsUri);
+                //log('Connecting...');
+                conn.onopen = function () {
+                    //log('Connected.');
+                    update_ui();
+                };
+                conn.onmessage = function (e) {
+                    var data = JSON.parse(e.data);
+                    switch (data.action) {
+                        case 'connect':
+                            name = data.name;
+                            log(name + ' You have joined the game ');
+                            update_ui();
+                            break;
+                        case 'disconnect':
+                            name = data.name;
+                            log(name + ' left the game');
+                            update_ui();
+                            break;
+                        case 'join':
+                            log(data.name+ ' joined the game');
+                            break;
+                        case 'sent':
+                            log(data.name + ' Entered a number: ' + data.number + ' - Result: ' + data.text);
+                            break;
+                        
+                    }
+                };
+                conn.onclose = function () {
+                    log(' You are out of the game ');
+                    conn = null;
+                    update_ui();
+                };
+            }
+            function disconnect() {
+                if (conn != null) {
+                    conn.close();
+                    conn = null;
+                    name = 'UNKNOWN';
+                    update_ui();
+                }
+            }
+            function update_ui() {
+                if (conn == null) {
+                    $('#status').text('disconnected');
+                    $('#connect').html('Connect');
+                    $('#send').prop("disabled", true);
+                } else {
+                    $('#status').text('connected (' + conn.protocol + ')');
+                    $('#connect').html('Disconnect');
+                    $('#send').prop("disabled", false);
+                }
+                $('#name').text(name);
+            }
+            $('#connect').on('click', function () {
+                if (conn == null) {
+                    connect();
+                } else {
+                    disconnect();
+                }
+                update_ui();
+                return false;
+            });
+            $('#send').on('click', function () {
+                var text = $('#text').val();
+                log(text);
+                conn.send(text);
+                $('#text').val('').focus();
+                return false;
+            });
+            $('#text').on('keyup', function (e) {
+                if (e.keyCode === 13) {
+                    $('#send').click();
+                    return false;
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h3>Guess the number!</h3>
+    <div>
+        <button id="connect">Join the game</button>&nbsp;|&nbsp;Status:
+        <span id="name">UNKNOWN</span>
+        <span id="status">disconnected</span>
+    </div>
+    <div id="log" style="width:50vw;height:15em;overflow:auto;border:1px solid black">
+    </div>
+    <form id="chatform" onsubmit="return false;">
+        <input id="text" type="text" />
+        <input id="send" type="button" value="Send" disabled />
+    </form>
+</body>
+
+</html>
